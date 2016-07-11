@@ -11,6 +11,7 @@
 
     <artifactId>timecheat-core</artifactId>
 
+    <!--TODO: opkuisen/depmgmt-->
     <dependencies>
         <!-- selenide -->
         <dependency>

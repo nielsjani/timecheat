@@ -7,9 +7,17 @@ public class PeoplesoftFinanceProcessor {
     public void process() {
         openStartPagina()
                 //TODO: vul hier uw credentials in
-            .vulCredentialsIn("", "")
+            .vulCredentialsIn("NJANI", "")
             .klikAanmelden()
-            .navigeerNaarCentrumProjectmedewerkers();
+            .navigeerNaarCentrumProjectmedewerkers()
+            .klikUrenformulierMakenWijzigen()
+            .klikNieuweWaardeToevoegen()
+                //TODO: niet hardcoden
+            .vulEinddatumPeriodeIn("08/07/2016")
+            .klikToev()
+            .klikDoorgaan()
+            .openProjectPopup()
+            .kiesProject("Partnerbeheersysteem");
     }
 
     private PeoplesoftFinanceLoginPagina openStartPagina() {
