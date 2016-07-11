@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/timecheat.iml" filepath="$PROJECT_DIR$/timecheat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/timecheat-core/timecheat-core.iml" filepath="$PROJECT_DIR$/timecheat-core/timecheat-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/timecheat-ui/timecheat-ui.iml" filepath="$PROJECT_DIR$/timecheat-ui/timecheat-ui.iml" />
+    </modules>
+  </component>
+</project>
