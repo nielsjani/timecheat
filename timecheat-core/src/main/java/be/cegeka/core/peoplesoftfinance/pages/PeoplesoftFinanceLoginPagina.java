@@ -1,4 +1,4 @@
-package be.cegeka.core.peoplesoftfinance;
+package be.cegeka.core.peoplesoftfinance.pages;
 
 import be.cegeka.core.TimeCheatPagina;
 import com.codeborne.selenide.SelenideElement;

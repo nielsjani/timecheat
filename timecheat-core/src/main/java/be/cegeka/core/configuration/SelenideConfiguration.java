@@ -12,6 +12,9 @@ public class SelenideConfiguration {
 
     public static final int SELENIDE_TIMEOUT = 10000;
 
+    //TODO: make independant of projectbeheer
+    //TODO: we need Firefox voor OBI
+    //TODO: run with PhantomJS?
     public static void configure() {
         Configuration.browser = CHROME;
         System.setProperty("selenide.browser", CHROME);
