@@ -1,0 +1,9 @@
+{
+    "env": {
+        "jasmine": true
+    },
+    "rules": {
+        "init-declarations": 0,
+        "max-nested-callbacks": 0
+    }
+}
