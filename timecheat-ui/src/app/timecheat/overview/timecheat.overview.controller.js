@@ -2,11 +2,12 @@
 
 export default class TimecheatOverviewController {
 
-    constructor() {
+    constructor(userService) {
         "ngInject";
+        this.userService = userService;
     }
 
-    getALoad() {
-        return "a load";
+    logIn() {
+        this.userService.user = {username: this.username, password: this.password};
     }
 }

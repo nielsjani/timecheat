@@ -1,1 +1,17 @@
-<h1>OLLEH DLROW {{$ctrl.getALoad()}}</h1>
+<div ng-show="!$ctrl.userService.isLoggedIn()">
+    <h1>Log in</h1>
+    <p>Voer de gebruikersnaam en wachtwoord in die u gebruikt voor "Mijn personeelsdossier" en dergelijke</p>
+    <form>
+        User name: <input ng-model="$ctrl.username" type="text" name="username"><br>
+        User password:<input ng-model="$ctrl.password" type="password" name="psw"><br>
+        <button ng-click="$ctrl.logIn()">Log in</button>
+    </form>
+</div>
+
+<div ng-show="$ctrl.userService.isLoggedIn()">
+    <h3>Acties</h3>
+    <h4><a>Maandrapport 'Mijn personeelsdossier' bekijken en wijzigen</a></h4>
+    <h4><a>Maandrapport 'Mijn personeelsdossier' afdrukken</a></h4>
+    <h4><a>Peoplesoft Finance invullen</a></h4>
+    <h4><a>Maandrapport OBI afdrukken</a></h4>
+</div>
