@@ -17,5 +17,10 @@ public abstract class TimeCheatPagina {
         $(By.tagName("body")).getWrappedDriver().switchTo().frame(frameName);
     }
 
+    protected void switchFocusToInnerIframeVoorMijnPersoneelsDossier(String frameName) {
+        $(By.tagName("frameset")).getWrappedDriver().switchTo().defaultContent();
+        $(By.tagName("frameset")).getWrappedDriver().switchTo().frame(frameName);
+    }
+
     protected abstract SelenideElement pageIdentifier();
 }

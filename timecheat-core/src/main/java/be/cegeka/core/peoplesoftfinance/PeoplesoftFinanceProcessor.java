@@ -1,6 +1,6 @@
 package be.cegeka.core.peoplesoftfinance;
 
-import be.cegeka.core.configuration.SelenideConfiguration;
+import be.cegeka.core.TimeCheatProcessor;
 import be.cegeka.core.peoplesoftfinance.pages.PeoplesoftFinanceLoginPagina;
 import be.cegeka.core.peoplesoftfinance.pages.PeoplesoftFinanceWeekUrenInvullenPagina;
 import com.codeborne.selenide.Selenide;
@@ -8,18 +8,20 @@ import com.codeborne.selenide.Selenide;
 import java.util.List;
 import java.util.Map;
 
+import static be.cegeka.core.configuration.Credentials.PASSWORD;
+import static be.cegeka.core.configuration.Credentials.USERNAME;
 import static be.cegeka.core.peoplesoftfinance.PeopleSoftFinanceFacturatieCategorieen.peopleSoftFinanceFacturatieCategorieen;
 import static com.google.common.collect.Maps.newHashMap;
 
-public class PeoplesoftFinanceProcessor {
+public class PeoplesoftFinanceProcessor extends TimeCheatProcessor {
 
     //TODO: betere oplossing mogelijk?
     private int magicIframeCounter = 1;
 
-    //TODO: Uren per week meegeven
+    //TODO: Uren per week meegeven + datums meegeven
     //TODO: Iets voorzien voor weken die in 2 maanden vallen
     public PeoplesoftFinanceProcessor(){
-        SelenideConfiguration.configure();
+        super("http://fin.vdab.be/psp/prdfin/?cmd=login&languageCd=DUT");
     }
 
     public void process() {
@@ -41,11 +43,8 @@ public class PeoplesoftFinanceProcessor {
 
     public PeopleSoftFinanceFacturatieCategorieen getPeopleSoftFinanceFacturatieCategorieen(){
         Map<String, List<String>> activiteitenVoorProjecten = newHashMap();
-        List<String> projectOpties = gaNaarUrenInvullenVoorWeek()
-                .openProjectPopup()
-                .getProjectOptiesEnSluitProjectPopup();
         PeoplesoftFinanceWeekUrenInvullenPagina urenInvullenPagina = new PeoplesoftFinanceWeekUrenInvullenPagina();
-        projectOpties.forEach(projectOptie -> {
+        getProjectOpties().forEach(projectOptie -> {
             activiteitenVoorProjecten.put(projectOptie, urenInvullenPagina.getActiviteitenVoorProjectoptie(projectOptie, magicIframeCounter));
             this.magicIframeCounter+=2;
         });
@@ -54,10 +53,16 @@ public class PeoplesoftFinanceProcessor {
                 .withProjectEnActiviteitenCategorieen(activiteitenVoorProjecten);
     }
 
+    private List<String> getProjectOpties() {
+        return gaNaarUrenInvullenVoorWeek()
+                .openProjectPopup()
+                .getProjectOptiesEnSluitProjectPopup();
+    }
+
     private PeoplesoftFinanceWeekUrenInvullenPagina gaNaarUrenInvullenVoorWeek() {
         return openStartPagina()
                 //TODO: vul hier uw credentials in
-                .vulCredentialsIn("NJANI", "")
+                .vulCredentialsIn(USERNAME,PASSWORD)
                 .klikAanmelden()
                 .navigeerNaarCentrumProjectmedewerkers()
                 .klikUrenformulierMakenWijzigen()
@@ -69,11 +74,8 @@ public class PeoplesoftFinanceProcessor {
     }
 
     private PeoplesoftFinanceLoginPagina openStartPagina() {
-        Selenide.open(startUrl());
+        Selenide.open(getStartUrl());
         return new PeoplesoftFinanceLoginPagina();
     }
 
-    public String startUrl() {
-        return "http://fin.vdab.be/psp/prdfin/?cmd=login&languageCd=DUT";
-    }
 }

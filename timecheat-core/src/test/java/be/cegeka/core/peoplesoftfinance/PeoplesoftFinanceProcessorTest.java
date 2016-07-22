@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PeoplesoftFinanceProcessorTest {
 
     @Test
-    public void test_processor(){
+    public void test_process(){
         new PeoplesoftFinanceProcessor().process();
     }
 
